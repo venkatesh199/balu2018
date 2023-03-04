@@ -1,0 +1,88 @@
+<template>
+    <div>
+        <lightning-card title="List of Account Records">
+            <lightning-button slot="actions" label="Delete" onclick={deleteRecords}></lightning-button><br />
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+                aria-labelledby="element-with-table-label other-element-with-table-label">
+                <thead>
+                    <tr>
+                        <th><lightning-input onchange={allSelected} type="checkbox"></lightning-input></th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="S.No">S.No</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Name">Name</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Industry">Industry</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Phone">Phone</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Action">Action</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={accounts} for:item="acc" for:index="index">
+                        <tr key={acc.Id}>
+                            <td><lightning-input type="checkbox" value={acc.Name} data-id={acc.Id}></lightning-input>
+                            </td>
+                            <td>{index}</td>
+                            <td class="slds-cell-wrap">{acc.Name}</td>
+                            <td>{acc.Industry}</td>
+                            <td>{acc.Phone}</td>
+                            <td>
+                                <lightning-button slot="actions" label="Click Me" onclick={handleClickMe}
+                                    data-name={index}></lightning-button>&nbsp;
+                                <lightning-button slot="actions" label="Update" onclick={updateRecords}
+                                    data-name={acc.Id}></lightning-button>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </lightning-card>
+    </div><br />
+    <!--<lightning-card title="Calculator input fileds">
+        <lightning-input name="Fnumber" label="First Number" value ={firstNumber} onchange={handleFirstChange}></lightning-input>
+        <lightning-input name="Snumber" label="Second Number" value ={secondNumber} onchange={handleChange}></lightning-input>
+        <lightning-input label="Enter a Value" value ={value} onchange={handleValueChange}></lightning-input><br/>
+        <div>
+            <lightning-button-group>
+                <lightning-button label='Submit' onclick={handleNavigation}></lightning-button>&nbsp;&nbsp;
+                <lightning-button label="Click Me" onclick={handlemessage}></lightning-button>&nbsp;&nbsp;
+                <lightning-button label="Pass Me" onclick={handlepassmessage}></lightning-button>
+            </lightning-button-group>
+        </div>
+    </lightning-card>
+    <lightning-card title="Query Selector Values">
+        <div>
+            <lightning-input name="First Name" label="First Query Name" class="first" value={firstname} onchange={handleFirstCahnge}></lightning-input>
+        </div>
+        <div>
+            <lightning-input name="Last Name" label="Last Query Name" class="last" value={lastname} onchange={handleSecondCahnge}></lightning-input>
+        </div>
+        The name is : {resultName}
+        <div>
+            <lightning-button-group>
+                <lightning-button label="Submit" onclick={updateName}></lightning-button>
+            </lightning-button-group>
+        </div>
+    </lightning-card>
+    <lightning-card title="Query Selctor All Example">
+        <lightning-button slot="actions" label="Get full Name" onclick={getFullName}></lightning-button>
+        <p class="slds_p_horizontal_small">
+           <lightning-input label="First Name" value={fname} onchange={handleQueryAllChange}></lightning-input>
+           <lightning-input label="Middle Name" value={mname} onchange={handleQueryAllChange}></lightning-input>
+           <lightning-input label="Last Name" value={lname} onchange={handleQueryAllChange}></lightning-input>
+        </p>
+        <p slot="footer">
+            Full Name is:{finalName}
+        </p>
+
+    </lightning-card>-->
+    <!--<c-contact-l-w-c onbtnclick ={handleEvent} item ={str}></c-contact-l-w-c>-->
+    <c-contact-l-w-c onbtnclick={handleEvent} items={strs}></c-contact-l-w-c>
+</template>

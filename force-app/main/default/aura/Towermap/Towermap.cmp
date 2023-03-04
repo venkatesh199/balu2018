@@ -1,0 +1,13 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" controller ="TowerMapController" access="global" >
+     <aura:attribute name="mapMarkers" type="Object" access="PRIVATE" />
+     <aura:attribute name="markersTitle" type="String" access="PRIVATE" />
+    <aura:attribute name="zoomLevel" type="Integer" />
+     <aura:handler name="init" value="{!this}" action="{!c.handleInit}"/>
+     <aura:if isTrue="{!!empty(v.mapMarkers)}" >
+     <lightning:map>
+         mapMarkers = "{!v.mapMarkers}"
+         markersTitle = "{!v.markersTitle}"
+         zoomLevel = "{!v.zoomLevel}"
+     </lightning:map>
+     </aura:if>
+</aura:component>

@@ -1,0 +1,8 @@
+<template>
+    <div>
+        <lightning-button label="Submit" onclick={handleClick} variant="brand"></lightning-button>
+    </div><br/>
+        <!--<c-child-component message={parentMessage}></c-child-component>-->
+        <c-child-component onbtnclick={handleChildButton} message={parentMessage}></c-child-component>
+    
+</template>

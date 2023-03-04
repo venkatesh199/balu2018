@@ -1,0 +1,196 @@
+<template>
+    <lightning-card title="List Of Book Records">
+        <div class="slds-grid slds-gutters slds-align_absolute-center">
+            <lightning-input type="Search"
+            onblur={handleKeyChange}
+               placeholder="Book Name"
+               onchange={searchKeyword}
+               ></lightning-input>&nbsp;&nbsp;
+         </div>        
+        <div>
+            <lightning-button variant="brand" label="New" onclick={showModal} class="slds-float_right"></lightning-button>
+            <lightning-button variant="brand" label="Navigate" onclick={naviagteToLWC} class="slds-float_right"></lightning-button>
+        </div><br/><br/><br/>
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="bagclor" scope="col">
+                        <a class="slds-th__action slds-text-link_reset bagclor" role="button" tabindex="0" onclick={sortRecs} name="Name">
+                            Name
+                            <lightning-icon icon-name="utility:arrowup" size="xx-small" if:true={nameUpBool}></lightning-icon>
+                            <lightning-icon icon-name="utility:arrowdown" size="xx-small" if:true={nameDWBool}></lightning-icon>
+                        </a>
+                        
+                        <!--<div class="slds-truncate" title="Name">Name</div>-->
+                    </th>
+                    <th class="bagclor" scope="col">
+                        <a class="slds-th__action bagclor slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="0" onclick={sortRecs} name="Category">
+                            Category
+                            <lightning-icon icon-name="utility:arrowup" size="xx-small" if:true={catUpBool}></lightning-icon>
+                            <lightning-icon icon-name="utility:arrowdown" size="xx-small" if:true={catDWBool}></lightning-icon>
+                        </a>
+                        <!--<div class="slds-truncate" title="Category">Category</div>-->
+                    </th>
+                    <th class="bagclor" scope="col">
+                        <a class="slds-th__action bagclor slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="0" onclick={sortRecs} name="PublishType">
+                            Publish Type
+                            <lightning-icon icon-name="utility:arrowup" size="xx-small" if:true={ptUpBool}></lightning-icon>
+                            <lightning-icon icon-name="utility:arrowdown" size="xx-small" if:true={ptDWBool}></lightning-icon>
+                        </a>
+                        <!--<div class="slds-truncate" title="Category">Category</div>-->
+                    </th>
+                    <th class="bagclor" scope="col">
+                        <a class="slds-th__action bagclor slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="0" onclick={sortRecs} name="Price">
+                            Price
+                            <lightning-icon icon-name="utility:arrowup" size="xx-small" if:true={pUpBool}></lightning-icon>
+                            <lightning-icon icon-name="utility:arrowdown" size="xx-small" if:true={pDWBool}></lightning-icon>
+                        </a>
+                        <!--<div class="slds-truncate" title="Price">Price</div>-->
+                    </th>
+                    <th class="bagclor" scope="col">
+                        <a class="slds-th__action bagclor slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="0" onclick={sortRecs} name="Count">
+                            Count
+                            <lightning-icon icon-name="utility:arrowup" size="xx-small" if:true={cUpBool}></lightning-icon>
+                            <lightning-icon icon-name="utility:arrowdown" size="xx-small" if:true={cDWBool}></lightning-icon>
+                        </a>
+                        <!--<div class="slds-truncate" title="Count">Count</div>-->
+                    </th>
+                    <th class="bagclor" scope="col">
+                        <div class="slds-truncate" title="Action"></div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each ={recordsToDisplay} for:item="item">
+                <tr class="slds-hint-parent" key={item.Id} >
+                    <th data-label="Name">
+                        <div class="slds-truncate" data-name={item.name} title={item.name}>{item.name}</div>
+                    </th>
+                    <th data-label="category">
+                        <div class="slds-truncate" data-name={item.category} title={item.category}>{item.category}</div>
+                    </th>
+                    <th data-label="publishtype">
+                        <div class="slds-truncate" data-name={item.category} title={item.category}>{item.publishtype}</div>
+                    </th>
+                    <th data-label="price">
+                        <div class="slds-truncate" data-name={item.price} title={item.price}>{item.price }</div>
+                    </th>
+                    <th data-label="count">
+                        <div class="slds-truncate"  data-name={item.count} title={item.count}>{item.count }</div>
+                    </th>
+                    <th data-label="Name">
+                        <!--<lightning-button-icon icon-name="utility:delete" alternative-text="Delete"   class="slds-m-left_xx-small" title="Delete"></lightning-button-icon>-->
+                        <lightning-button-icon icon-name="utility:delete"    variant="bare" alternative-text="Delete"   class="slds-m-left_xx-small" title="Delete" onclick={deleteBooks} data-name={item.Id}></lightning-button-icon>
+                        <lightning-button-icon icon-name="utility:edit"    variant="bare" alternative-text="Edit"   class="slds-m-left_xx-small" title="Edit" onclick={editRecord} data-name={item.Id}></lightning-button-icon>
+                    </th>   
+                </tr>
+               </template>
+            </tbody>
+        </table>
+    </lightning-card>
+    <template if:true={isShowModal}>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+         <!-- modal header start -->
+           <header class="slds-modal__header">
+              <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideModalBox}>
+                 <lightning-icon icon-name="utility:close"
+                    alternative-text="close"
+                    variant="inverse"
+                    size="small" ></lightning-icon>
+                 <span class="slds-assistive-text">Close</span>
+              </button>
+              <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Create a New Book</h2>
+           </header>
+       
+           <!-- modal body start -->
+           <div class="slds-grid slds-wrap slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+            <div class="slds-col slds-size_1-of-2">
+                 <lightning-input type="text" label="Name" value={rec.Name} onchange = {handleChange} required></lightning-input>
+            </div>&nbsp;&nbsp;
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-input type="text" label="Category" value={rec.Category__c} onchange = {handleChange} required></lightning-input>
+            </div>&nbsp;&nbsp;
+            <div class="slds-col slds-size_1-of-2">
+                <!--<lightning-input type="text" label="Publish Type" value={rec.Publish_Type__c} onchange = {handleChange}></lightning-input>-->
+                <div class="slds-p-horizontal--medium">
+                    <label class="slds-form-element__label">Publish Type</label>
+                    <div class="slds-form-element__control">
+                        <div class="slds-select_container">
+                        <select class="slds-select" onchange={handlePTChange}>
+                                <option value="">---None---</option>                
+                                <template for:each={selectTargetValues.data} for:item="selectOptItem">
+                                    <option key={selectOptItem.custFldvalue} value={selectOptItem.custFldvalue}>
+                                        {selectOptItem.custFldlabel}
+                                    </option>
+                                </template>
+                        </select>
+                        </div>
+                    </div>
+                    <br/>
+                        <b>Selected Picklist Value Is:-</b> <span style="color:brown; font-weight:bold;"> {picklistVal}</span>
+                    </div> 
+            </div>&nbsp;&nbsp;
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-input type="number" label="Count" value={rec.Count__c}  onchange= {handleChange}></lightning-input>
+            </div>&nbsp;&nbsp;
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-input type="number" label="Price"  value={rec.Price__c} onchange= {handleChange}></lightning-input>
+            </div>
+           </div>
+ 
+           <!-- modal footer start-->
+           <footer class="slds-modal__footer">
+              <button class="slds-button slds-button_neutral" onclick={hideModalBox}>Cancel</button>
+              <button class="slds-button slds-button_neutral" onclick={createBookRecord}>Save</button>
+           </footer>
+        
+        </div>
+     </section>
+     <div class="slds-backdrop slds-backdrop_open"></div>
+
+    </template>
+    <template if:true={isEditModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+             <!-- modal header start -->
+               <header class="slds-modal__header">
+                  <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideModalBox}>
+                     <lightning-icon icon-name="utility:close"
+                        alternative-text="close"
+                        variant="inverse"
+                        size="small" ></lightning-icon>
+                     <span class="slds-assistive-text">Close</span>
+                  </button>
+                  <h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate">Update Existing Book</h2>
+               </header>
+           
+               <!-- modal body start -->
+               <div class="slds-grid slds-wrap slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                <div class="slds-col slds-size_1-of-2">
+                     <lightning-input type="text" label="Name" value={bookRecords.name} onchange = {handleBookChange} required></lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-input type="text" label="Category" value={bookRecords.category} onchange = {handleBookChange} required></lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-input type="number" label="Count" value={bookRecords.count}  onchange= {handleBookChange}></lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-input type="number" label="Price"  value={bookRecords.price} onchange= {handleBookChange}></lightning-input>
+                </div>
+               </div>
+     
+               <!-- modal footer start-->
+               <footer class="slds-modal__footer">
+                  <button class="slds-button slds-button_neutral" onclick={hideModalBox}>Cancel</button>
+                  <button class="slds-button slds-button_neutral" onclick={editBookRecord}>Save</button>
+               </footer>
+            
+            </div>
+         </section>
+        </template>
+        <c-page-navigation totalrecords={totalrecordscb} onbtnclick={nextPage} totalpages={totalpagescb} pagenumber={pageNumber}
+        onbtnclick1 ={firstPage} onbtnclick2 ={previousPage} onbtnclick3 ={lastPage}>
+        </c-page-navigation>
+</template>

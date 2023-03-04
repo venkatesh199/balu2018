@@ -1,0 +1,47 @@
+<template>
+    <lightning-card title="JavaScript Examples">
+        <lightning-button slot="actions" label="JavaScript Button" onclick={handleClick}>
+        </lightning-button>
+        <div style="height: 300px;">
+            <lightning-datatable key-field="id" data={studentsData} columns={columns}>
+            </lightning-datatable>
+        </div>
+        <p><b>Total Science Marks:{totalscienceMarks}</b></p><br />
+        <p><b>Total Maths Marks:{totalMathsMarks}</b></p><br />
+        <p><b>Total Telugu Marks:{totalTeluguMarks}</b></p><br>
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_fixed-layout slds-table_striped" aria-label=" Example headless table of Opportunities with cell content truncated ">
+            <thead>
+            <tr class="slds-line-height_reset">
+            <th class="" scope="col">
+            <div class="slds-truncate" title="Typical Column Header">Science</div>
+            </th>
+            <th class="" scope="col">
+            <div class="slds-truncate" title="Truncated, no wrap">Telugu</div>
+            </th>
+            <th class="" scope="col">
+            <div class="slds-truncate" title="Typical Column Header">Maths</div>
+            </th>
+            </tr>
+            </thead>
+            <tbody>
+                <template if:true={data} for:each={data} for:item="item">
+                    <tr class="slds-hint-parent" key={item.Id}>
+                        <th data-label="Typical Column Header" scope="row">
+                        <div class="slds-truncate" title="Typical cell content">{item.science}</div>
+                        </th>
+                        <td class="slds-cell-wrap" data-label="Truncated, no wrap">
+                        <div class="slds-truncate" title="Cell content that is very long.
+                        It also has a line break.
+                        It has more than one line break">{item.Maths}</div>
+                        </td>
+                        <td data-label="Typical Column Header">
+                        <div class="slds-truncate" title="Typical cell content">{item.Telugu}</div>
+                        </td>
+                        </tr>
+
+                </template>
+            
+            </tbody>
+            </table>
+    </lightning-card>
+</template>

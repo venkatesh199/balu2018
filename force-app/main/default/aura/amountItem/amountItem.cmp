@@ -1,0 +1,16 @@
+<aura:component>
+    <aura:attribute name="amount" type="Account"/>
+    <p>Amount:
+        <lightning:formattedNumber value="{!v.amount.Amount__c}" style="currency"/>
+    </p>
+    <p>
+        Name: {!v.amount.name}
+    </p>
+    <p>
+        <lightning:input type="toggle"                            
+                         label="amount?"                           
+                         name="amount"                         
+                         checked="{!v.amount.Amount__c}" />
+     </p> 
+    <!-- Other markup here -->
+</aura:component>

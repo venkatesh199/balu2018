@@ -1,0 +1,44 @@
+<aura:component>
+    <!--add custom label for input field-->
+    <!--lightning help text for input field-->
+    
+    <!-- use variant="label-hidden" for hide standard label-->
+    <div class="slds-grid slds-gutters">
+        <div class="slds-col">
+            <span>
+                <label class="slds-form-element__label" style="margin-right: 0.5rem;">Last Name</label>
+                <lightning:helptext content="Please enter your last name" class="customIcon"/> 
+                
+                <lightning:input type="text"
+                                 name="lName"
+                                 label="Last Name"
+                                 variant="label-hidden"/>
+                <label class="slds-form-element__label" style="margin-right: 0.5rem;">Name</label>
+                <lightning:helptext content="Please enter your name" class="customIcon"/> 
+                
+                <lightning:input type="text"
+                                 name="lName"
+                                 label="Last Name"
+                                 variant="label-hidden"/>
+            </span>
+        </div>
+        
+        <div class="slds-col">
+            <span>
+                <label class="slds-form-element__label" style="margin-right: 0.5rem;">First Name</label>
+                <lightning:helptext content="Please enter your first name" class="customIcon"/> 
+                <lightning:input type="text"
+                                 name="fName"
+                                 label="First Name"
+                                 variant="label-hidden"/>
+                <label class="slds-form-element__label" style="margin-right: 0.5rem;">Name</label>
+                <lightning:helptext content="Please enter your name" class="customIcon"/> 
+                
+                <lightning:input type="text"
+                                 name="lName"
+                                 label="Last Name"
+                                 variant="label-hidden"/>
+            </span>
+        </div>
+    </div>
+</aura:component>

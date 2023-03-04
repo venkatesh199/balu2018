@@ -1,0 +1,27 @@
+<template>
+    <lightning-card title="Spoonicular search">
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col">
+                <span><lightning-input placeholder="Recipe Search" type="Search" value={recipename} onchange={handleSearch}></lightning-input></span>
+            </div>
+            <div class="slds-col">
+                <span><lightning-input placeholder="Quantity" type="Search" value={quantity} onchange={handleQuantity}></lightning-input></span>
+            </div>
+            <div class="slds-col">
+                <span> <lightning-button label="Search" variant="brand" onclick={handleSearchRecipe}></lightning-button></span>
+            </div>
+        </div>
+        <div>
+            <template if:true={data}>
+                <lightning-card title="List Of Users From Gorest Website Fetch Mthod">
+                    <div style="height: 10px"></div>
+                    <lightning-datatable 
+                    key-field="id" 
+                    data={data} 
+                    columns={columns}>
+                    </lightning-datatable>
+                </lightning-card>
+            </template>
+        </div>
+    </lightning-card>
+</template>

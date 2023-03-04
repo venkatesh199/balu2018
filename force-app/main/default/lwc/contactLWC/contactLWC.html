@@ -1,0 +1,65 @@
+<template>
+    <!--Navigated from LWC with property Value is : {propertyValue}<br/>
+    Data is passed from Parent Component is : {item}<br/>
+    Data is passed from Parent Component value is : {items}<br/>
+    <lightning-button label="Child Button" onclick={handleClick}></lightning-button>-->
+    <lightning-card title="List Of Contact Records">
+        <!--<p>Total Selected Records : {selectedRecordsCount}</p>-->
+        <lightning-button slot="actions" label="Show Selected Contacts" variant="brand" onclick={showContacts}></lightning-button>
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered" aria-labelledby="element-with-table-label other-element-with-table-label">
+            <thead>
+                <tr>
+                    <td><lightning-input type="checkbox" onchange={selectAll}></lightning-input></td>
+                    <td><b>Name</b></td>
+                    <td><b>Last Name</b></td>
+                    <td><b>Phone</b></td>
+                    <td><b>Email</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                <template if:true={isShowContacts} for:each={contactdData} for:item="con">
+                    <tr key={con.id}>
+                        <td><lightning-input type="checkbox" value={con.Name} data-id={con.Id}></lightning-input></td>
+                        <td>{con.Name}</td>
+                        <td>{con.LastName}</td>
+                        <td>{con.Phone}</td>
+                        <td>{con.Email}</td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </lightning-card>
+    <template if:true={isShowModel}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open slds-modal_small">
+            <div class="slds-modal__container">
+            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+            <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+            </svg>
+            <span class="slds-assistive-text">Cancel and close</span>
+            </button>
+            <div class="slds-modal__header">
+            <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Selected Contacts..</h1>
+            <p>Total Selected Records : {selectedRecordsCount}</p>
+            </div>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+              <template for:each={selectedContacts} for:item="con">
+                <dl class="slds-list_horizontal slds-wrap" if:true={con.Id} key={con.Id}>
+                    <dt class="slds-item_label slds-truncate" title="First Name">Contact Name:</dt>
+                    <dd class="slds-item_detail slds-truncate">{con.Name}</dd>
+                    <dt class="slds-item_label slds-truncate" title="LastName">Contact Id:</dt>
+                    <dd class="slds-item_detail slds-truncate">{con.Id}</dd>
+                    <hr>
+                </dl>
+              </template>
+            </div>
+            <div class="slds-modal__footer">
+            <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={cancil}>Cancel</button>
+            <!--<button class="slds-button slds-button_brand">Save</button>-->
+            </div>
+            </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+    
+</template>

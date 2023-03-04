@@ -1,0 +1,20 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+   	<aura:attribute name="item" type="Camping_Item__c" required="true" 
+                    default="{Name:'Xphone', Price__c: '100', Quantity__c:'1',Packed__c:false}"/>
+    <aura:attribute name="disabled" type="Boolean" default="false"/>
+    
+    <p>Name:{!v.item.Name}</p>
+    <p>Packed:{!v.item.Packed__c}</p>
+    <p>Price: <lightning:formattedNumber value="{!v.item.Price__c }" style="currency"/></p>
+    <p>Quantity:<lightning:formattedNumber value="{!v.item.Quantity__c}"/></p>
+    <!--<p><lightning:input type="toggle"
+                        label="Packed"
+                        name="packedvalue"
+                        checked="{!v.item.Packed__c}"/>
+    </p>-->
+    <div><lightning:button label="Packed!" 
+                      	onclick="{!c.packItem}"
+                           disabled="{!v.disabled}"/> 
+    </div>	
+       
+</aura:component>

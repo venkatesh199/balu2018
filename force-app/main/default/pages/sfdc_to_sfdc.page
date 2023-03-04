@@ -1,0 +1,5 @@
+<apex:page controller="ExternalServiceCall">
+<apex:form >
+<apex:commandButton value="CallService" action="{!callMethod}" title="CallService"/>
+</apex:form>
+</apex:page>

@@ -1,0 +1,33 @@
+<template>
+    <lightning-card title="Creating the new GoRest Users">
+        <div>
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col">
+                    <span><lightning-input label="Name" value={name} onchange={handleChange}></lightning-input></span>
+                </div>
+                <div class="slds-col">
+                    <span><lightning-input label="Email" value={email} onchange={handleChange}></lightning-input></span>
+                </div>
+            </div>
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col">
+                    <lightning-input label="Gender" value={gender} onchange={handleChange}></lightning-input>
+                </div>            
+                <div class="slds-col">
+                    <lightning-input label="Status" value={status} onchange={handleChange}></lightning-input>
+                </div>
+            </div>
+        </div></br>
+        <div class="">
+            <lightning-button label="Create User" variant="brand" slot="action" onclick={createGorestUser}></lightning-button>
+
+        </div>
+        <div if:true={goRestResponse}>
+            <p><b>Id : {responseId}</b></p>
+            <p><b>Name : {responseName}</b></p>
+            <p><b>Email : {responseEmail}</b></p>
+            <p><b>Gender : {responseGender}</b></p>
+            <p><b>Status : {responseStatus}</b></p>
+        </div>
+    </lightning-card>
+</template>

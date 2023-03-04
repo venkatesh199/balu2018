@@ -1,0 +1,94 @@
+<aura:component controller="DeleteWithCheckboxController">
+    <aura:handler name= "init" value = "this" action="{!c.doInit}"/>
+    <aura:attribute name ="searchResult" type="List" description="use for store and display account list return from server"/>
+    <aura:attribute name="options" type="List" default="[
+                                                        {'label': 'First Name', 'value': 'FirstName'},
+                                                        {'label': 'Last Name', 'value': 'LastName'},
+                                                        {'label': 'phone', 'value': 'MobilePhone'},
+                                                        ]"/>
+    <aura:attribute name = "selectedValues" type = "List"/>
+    <aura:attribute name = "isOpen" type = "boolean"/>
+     <aura:if isTrue="{!v.isOpen}">
+   <!--###### MODAL BOX Start From Here ######--> 
+      <div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open ">
+        <div class="slds-modal__container">
+          <!-- ###### MODAL BOX HEADER Part Start From Here ######-->
+          <div class="slds-modal__header">
+            <button class="slds-button slds-modal__close slds-button--icon-inverse" title="Close" onclick="{!c.closeModel}">
+              X
+            <span class="slds-assistive-text">Close</span>
+            </button>
+            <h2 id="header99" class="slds-text-heading--medium">Manage Table Columns</h2>
+          </div>
+          <!--###### MODAL BOX BODY Part Start From Here ######-->
+          <div class="slds-modal__content slds-p-around--medium">
+              <div class="slds-p-around_medium">
+                  <lightning:checkboxGroup aura:id="mygroup"
+                                           name="checkboxGroup"
+                                           label="Manage Cloumn"
+                                           options="{! v.options }"
+                                           value="{! v.selectedValues }"
+                                           required="true"/>
+              </div>  
+            </div>
+          <!--###### MODAL BOX FOOTER Part Start From Here ######-->
+          <div class="slds-modal__footer">
+             <button class="slds-button slds-button--neutral" onclick="{!c.closeModel}" >Done</button>
+          </div>
+        </div>
+      </div>
+      <div class="slds-backdrop slds-backdrop--open"></div>
+      <!--###### MODAL BOX Part END Here ######-->
+ </aura:if>
+    
+    <div class="slds-m-around--large">  
+        <!--###### lightning button icon for show/hide columns popup ######-->	
+        <div class="slds-clearfix">
+            <div class="slds-float_right">
+               <lightning:buttonIcon size="large" onclick="{!c.openModel}" iconName="utility:matrix" variant="bare" title="manage table columns" alternativeText="Settings" iconClass="dark"/>
+            </div>
+        </div>
+     
+        <br/><br/> 
+	  <!--###### lightning data table start ######-->		
+      <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+         <thead>
+            <tr class="slds-text-title_caps">
+                <th scope="col">
+                    <div class="slds-truncate" title="Contact Name">Name</div>
+                </th>                
+                <!--###### the value of element attribute in child component must be same as checkboxGroup value  ######-->
+                <c:auraIfContains list="{!v.selectedValues}"  element="FirstName">
+                    <th scope="col"><div class="slds-truncate" title="First Name">First Name</div></th>
+                </c:auraIfContains>
+                <c:auraIfContains list="{!v.selectedValues}"  element="LastName"> 
+                    <th scope="col"><div class="slds-truncate" title="Last Name">Last Name</div></th>
+                </c:auraIfContains>
+                <c:auraIfContains list="{!v.selectedValues}"  element="MobilePhone">
+                    <th scope="col"><div class="slds-truncate" title="MobilePhone">Phone</div></th>
+                </c:auraIfContains>
+                
+            </tr>
+         </thead>
+         <tbody>
+        
+            <!--### display all records of searchResult attribute by aura:iteration ###-->
+            <aura:iteration items="{!v.searchResult}" var="acc">
+               <tr>
+                
+                 <td><div class="slds-truncate">{!acc.Name}</div></td>
+                 <c:auraIfContains list="{!v.selectedValues}"  element="FirstName">  
+                   <td><div class="slds-truncate">{!acc.FirstName}</div></td>
+                 </c:auraIfContains>
+                 <c:auraIfContains list="{!v.selectedValues}"  element="LastName"> 
+                   <td><div class="slds-truncate">{!acc.LastName}</div></td>
+                 </c:auraIfContains>
+                 <c:auraIfContains list="{!v.selectedValues}"  element="MobilePhone"> 
+                   <td><div class="slds-truncate">{!acc.MobilePhone}</div></td>
+                 </c:auraIfContains>
+               </tr>
+            </aura:iteration>
+         </tbody>
+      </table>
+   </div>
+</aura:component>

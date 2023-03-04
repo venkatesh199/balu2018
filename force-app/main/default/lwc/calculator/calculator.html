@@ -1,0 +1,27 @@
+<template>
+    <lightning-card title="Simple Calculator">
+        <div class="slds-size_1-of-3">
+            <lightning-input label="First Number" value={firstNumber} onchange={handleChange} required=""></lightning-input>
+            <lightning-input label="Second Number" value={secondNumber} onchange={handleChange} required=""></lightning-input>
+        </div><br></br>
+        <div if:true={result}>
+            <p><b>Result : {result}</b></p>
+        </div><br></br>
+        <div>
+            <lightning-button-group>
+                <div>
+                    <lightning-button label="Add" variant="brand" onclick={add}></lightning-button>&nbsp;
+                </div>
+                <div>
+                    <lightning-button label="Subtract" variant="brand" onclick={subtract}></lightning-button>&nbsp;
+                </div>
+                <div>
+                    <lightning-button label="Multiply" variant="brand" onclick={multiply}></lightning-button>&nbsp;
+                </div>
+                <div>
+                    <lightning-button label="Division" variant="brand" onclick={division}></lightning-button>
+                </div>
+            </lightning-button-group>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,33 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <lightning:overlayLibrary aura:id ="overlayLib"/>
+    <lightning:button name="modal" label="Show modal" onclick ="{!c.handleShowModal}"/>
+    <lightning:navigation aura:id="navService"/>
+    <a href="{!v.url}" onclick="{!c.handleClick}">Link</a>
+    <lightning:button label="Navigate" onclick="{!c.handleClick}"/>
+    <div class="slds-p-bottom_large slds-p-left_large" style="width:500px">
+        <lightning:recordEditForm aura:id="recordEditForm"
+                                  recordId="0010o00002BmlYCAAZ"
+                                  objectApiName="Account">
+            <lightning:messages />
+            <lightning:inputField fieldName="Name" />
+            <lightning:inputField fieldName="Industry" />
+            <lightning:inputField fieldName="Fax" />
+            <lightning:inputField fieldName="Phone" />
+            <!--Picklist-->
+            <lightning:inputField fieldName="Type" />
+            <lightning:button aura:id="submit" type="submit" label="Update Record" class="slds-m-top_medium" />
+        </lightning:recordEditForm>
+    </div>
+    <!-- Record Display -->
+    <div class="slds-p-bottom_large slds-p-left_large" style="width:500px">
+        <lightning:recordViewForm recordId="0010o00002BmlYCAAZ" objectApiName="Account">
+            <div class="slds-box">
+                <lightning:outputField fieldName="Name" />
+                <lightning:outputField fieldName="Industry" />
+                <lightning:outputField fieldName="Phone" />
+                <lightning:outputField fieldName="Type" />
+                <lightning:outputField fieldName="Fax" />
+            </div>
+        </lightning:recordViewForm>
+    </div>
+</aura:component>
