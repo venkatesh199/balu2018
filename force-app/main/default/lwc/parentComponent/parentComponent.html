@@ -1,8 +1,13 @@
 <template>
-    <div>
-        <lightning-button label="Submit" onclick={handleClick} variant="brand"></lightning-button>
+    <lightning-card>
+    <div> 
+        {renderValue}<br/>
+        <p lang={lang} dir={dir}>This is the English</p><br/>
+        <lightning-input label="Name" value={rajee} class="moksha"></lightning-input><br/>
+        <lightning-button label="Submit" onclick={handleClick} variant="brand"></lightning-button><br/>
+        <lightning-button label="Render Button" onclick={handleRenderButton}></lightning-button>
     </div><br/>
         <!--<c-child-component message={parentMessage}></c-child-component>-->
         <c-child-component onbtnclick={handleChildButton} message={parentMessage}></c-child-component>
-    
+    </lightning-card>
 </template>
